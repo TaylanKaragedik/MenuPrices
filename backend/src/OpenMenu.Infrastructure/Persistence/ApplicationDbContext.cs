@@ -1,9 +1,11 @@
 using Microsoft.EntityFrameworkCore;
+using OpenMenu.Application.Common.Interfaces;
 using OpenMenu.Domain.Entities;
 
 namespace OpenMenu.Infrastructure.Persistence;
 
-public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : DbContext(options)
+public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+    : DbContext(options), IApplicationDbContext
 {
     public DbSet<Restaurant> Restaurants => Set<Restaurant>();
     public DbSet<Menu> Menus => Set<Menu>();
