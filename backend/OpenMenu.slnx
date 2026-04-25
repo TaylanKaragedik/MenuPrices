@@ -1,0 +1,8 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/OpenMenu.Application/OpenMenu.Application.csproj" />
+    <Project Path="src/OpenMenu.Domain/OpenMenu.Domain.csproj" />
+    <Project Path="src/OpenMenu.Infrastructure/OpenMenu.Infrastructure.csproj" />
+    <Project Path="src/OpenMenu.WebAPI/OpenMenu.WebAPI.csproj" />
+  </Folder>
+</Solution>
