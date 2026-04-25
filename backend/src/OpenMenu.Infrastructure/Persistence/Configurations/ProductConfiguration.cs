@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using OpenMenu.Domain.Entities;
 using System.Text.Json;
@@ -27,6 +28,11 @@ public class ProductConfiguration : IEntityTypeConfiguration<Product>
             .HasColumnType("jsonb")
             .HasConversion(
                 v => JsonSerializer.Serialize(v, JsonOptions),
-                v => JsonSerializer.Deserialize<Dictionary<string, object>>(v, JsonOptions));
+                v => JsonSerializer.Deserialize<Dictionary<string, object>>(v, JsonOptions),
+                new ValueComparer<Dictionary<string, object>>(
+                    (a, b) => JsonSerializer.Serialize(a, JsonOptions) == JsonSerializer.Serialize(b, JsonOptions),
+                    c => JsonSerializer.Serialize(c, JsonOptions).GetHashCode(),
+                    c => JsonSerializer.Deserialize<Dictionary<string, object>>(
+                        JsonSerializer.Serialize(c, JsonOptions), JsonOptions)!));
     }
 }

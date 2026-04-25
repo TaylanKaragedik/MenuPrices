@@ -1,3 +1,5 @@
+using OpenMenu.Application;
+using OpenMenu.Infrastructure;
 using OpenMenu.WebAPI.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -7,6 +9,9 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 builder.Services.AddProblemDetails();
+
+builder.Services.AddApplication();
+builder.Services.AddInfrastructure(builder.Configuration);
 
 var app = builder.Build();
 
